@@ -161,7 +161,7 @@ func UnitBind(unitType string) {
 //
 // Conditions are combined using an `and` operation
 func UnitRadar(target1 RadarTarget, target2 RadarTarget, target3 RadarTarget, sortOrder bool, sort RadarSort) Unit {
-	return nil
+	return Unit{}
 }
 
 // Locate a block of the provided ore type

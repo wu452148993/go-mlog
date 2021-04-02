@@ -78,9 +78,24 @@ func selectorExprToMLOG(ctx context.Context, ident Resolvable, selectorExpr *ast
 				},
 			}, "", nil
 		}
+	} else {
+		ident.(*DynamicVariable).Name = selectorExpr.X.(*ast.Ident).Name + "_" + selectorExpr.Sel.Name
+		return []MLOGStatement{
+			&MLOGFunc{
+				Function: funcTranslations["m.Sensor"],
+				Arguments: []Resolvable{
+					&NormalVariable{Name: selectorExpr.X.(*ast.Ident).Name},
+					&Value{Value: selectors[selectorExpr.Sel.Name]},
+				},
+				Variables: []Resolvable{
+					ident,
+				},
+				SourcePos: ctx.Value(contextStatement).(ast.Node),
+			},
+		}, "", nil
 	}
 
-	return nil, "", Err(ctx, fmt.Sprintf("unknown selector: %s", name))
+	//return nil, "", Err(ctx, fmt.Sprintf("unknown selector: %s", name))
 }
 
 func callExprToMLOG(ctx context.Context, callExpr *ast.CallExpr, ident []Resolvable) ([]MLOGStatement, error) {

@@ -30,6 +30,8 @@ func init() {
 	transpiler.RegisterSelector("m.BReactor", BReactor)
 	transpiler.RegisterSelector("m.BUnitModifier", BUnitModifier)
 	transpiler.RegisterSelector("m.BExtinguisher", BExtinguisher)
+
+	transpiler.RegisterSelector("Health", Health)
 }
 
 type RadarTarget = string
@@ -46,7 +48,7 @@ const (
 	RTGround   = RadarTarget("ground")
 )
 
-type RadarSort = string
+type  RadarSort = string
 
 const (
 	RSDistance  = RadarSort("distance")
@@ -58,7 +60,15 @@ const (
 
 type Link = interface{}
 
-type Unit = interface{}
+type Unit = struct{
+	Health float64
+}
+
+type UnitAttribute = string
+
+const (
+	Health = UnitAttribute("@health")
+)
 
 type HealthC = interface{}
 

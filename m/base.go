@@ -173,7 +173,7 @@ func GetLink(address int) Link {
 //
 // Conditions are combined using an `and` operation
 func Radar(from string, target1 RadarTarget, target2 RadarTarget, target3 RadarTarget, sortOrder bool, sort RadarSort) Unit {
-	return nil
+	return Unit{}
 }
 
 // Extract information indicated by sense from the provided block
